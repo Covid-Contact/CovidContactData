@@ -11,8 +11,8 @@ import {StatisticsService} from "../statistics/statistics.service";
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  fromAge: string = ''
-  toAge: string = ''
+  fromAge: string = '18'
+  toAge: string = '30'
   gender: string = ''
 
   isDisabled = false
@@ -20,7 +20,7 @@ export class UsersComponent implements OnInit {
   public barChartOptions: ChartOptions = {
     responsive: true
   };
-  public barChartLabels: Label[] = ['18', '19', '20', '21', '22', '23', '24'];
+  public barChartLabels: Label[] = [];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public colors: Array<any> = [
@@ -30,7 +30,7 @@ export class UsersComponent implements OnInit {
   ]
 
   public barChartData: ChartDataSets[] = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Interactions'}
+    {data: [], label: 'Interactions'}
   ];
 
   public fromAgeControl = new FormControl(this.fromAge, [
@@ -48,16 +48,13 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.onFilterStatistics()
   }
 
   onAgeChanged() {
     const from = parseInt(this.fromAge)
     const to = parseInt(this.toAge)
     this.isDisabled = from <= 0 || to <= 0 || from > to
-  }
-
-  onGenderChanged() {
-    console.log(this.gender)
   }
 
   onFilterStatistics(): void {

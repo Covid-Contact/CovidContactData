@@ -32,4 +32,18 @@ export class StatisticsService {
 
     return this.http.get<UserStatistics>(this.userInteractionsUrl, {params: queryParams})
   }
+
+  getLocationInteractions(params: LocationInteractionParams) {
+    let queryParams = new HttpParams()
+
+    if (params.country != '') {
+      queryParams = queryParams.set('country', params.country)
+    } else if (params.region != '') {
+      queryParams = queryParams.set('region', params.region)
+    } else if (params.province != '') {
+      queryParams = queryParams.set('province', params.province)
+    }
+
+    return this.http.get<LocationStatistics>(this.locationInteractionsUrl, {params: queryParams})
+  }
 }

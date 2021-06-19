@@ -9,7 +9,9 @@
     "src/main.ts",
     "src/polyfills.ts",
     "src/app/statistics/UserInteractionParams.ts",
-    "src/app/statistics/UserStatistics.ts"
+    "src/app/statistics/UserStatistics.ts",
+    "src/app/statistics/LocationInteractionParams.ts",
+    "src/app/statistics/LocationStatistics.ts"
   ],
   "include": [
     "src/**/*.d.ts"

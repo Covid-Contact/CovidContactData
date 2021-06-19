@@ -17,7 +17,12 @@
 }
 
 .filter {
-  width: 100%;
+  width: 48%;
+}
+
+.filterWithMargin {
+  width: 48%;
+  padding-left: 4%;
 }
 
 .fullWidthButton {

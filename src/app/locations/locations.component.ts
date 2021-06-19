@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ChartDataSets, ChartOptions, ChartType} from "chart.js";
 import {Label} from "ng2-charts";
 import {Router} from "@angular/router";
+import {StatisticsService} from "../statistics/statistics.service";
 
 @Component({
   selector: 'app-locations',
@@ -9,12 +10,14 @@ import {Router} from "@angular/router";
   styleUrls: ['./locations.component.css']
 })
 export class LocationsComponent implements OnInit {
-  location: String = ''
+  type: string = ''
+  location: string = ''
+  isDisabled: boolean = true
 
   public barChartOptions: ChartOptions = {
     responsive: true,
   };
-  public barChartLabels: Label[] = ['Barcelona', 'Vilanova i la Geltru', 'Mataro', 'Sitges', 'Sant Boi', 'Girona', 'Puigcerda'];
+  public barChartLabels: Label[] = [];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public colors: Array<any> = [
@@ -24,11 +27,12 @@ export class LocationsComponent implements OnInit {
   ]
 
   public barChartData: ChartDataSets[] = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Interactions'}
+    {data: [], label: 'Interactions'}
   ];
 
   constructor(
-    private router: Router
+    private router: Router,
+    private statisticsService: StatisticsService
   ) {
   }
 
@@ -36,7 +40,21 @@ export class LocationsComponent implements OnInit {
   }
 
   onFilterStatistics() {
+    const result = this.statisticsService.getLocationInteractions({
+      country: this.type == 'country' ? this.location : '',
+      region: this.type == 'region' ? this.location : '',
+      province: this.type == 'province' ? this.location : '',
+    })
 
+    result.subscribe(
+      data => {
+        this.barChartLabels = data.xaxes
+        this.barChartData[0].data = data.yaxes
+      },
+      error => {
+        console.error(error)
+      }
+    )
   }
 
   onClear() {
@@ -45,5 +63,9 @@ export class LocationsComponent implements OnInit {
 
   onNavigateToUsers() {
     this.router.navigate(['/users'])
+  }
+
+  onLocationChanged() {
+    this.isDisabled = this.type == '' || this.location == ''
   }
 }
