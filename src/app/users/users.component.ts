@@ -15,8 +15,6 @@ export class UsersComponent implements OnInit {
   toAge: string = '30'
   gender: string = ''
 
-  isDisabled = false
-
   public barChartOptions: ChartOptions = {
     responsive: true
   };
@@ -51,10 +49,15 @@ export class UsersComponent implements OnInit {
     this.onFilterStatistics()
   }
 
-  onAgeChanged() {
+  onValueChanged() {
     const from = parseInt(this.fromAge)
     const to = parseInt(this.toAge)
-    this.isDisabled = from <= 0 || to <= 0 || from > to
+
+    if (to < from) {
+      this.toAge = this.fromAge
+    }
+
+    this.onFilterStatistics()
   }
 
   onFilterStatistics(): void {
@@ -79,6 +82,9 @@ export class UsersComponent implements OnInit {
     this.fromAge = ''
     this.toAge = ''
     this.gender = ''
+
+    this.barChartLabels = []
+    this.barChartData[0].data = []
   }
 
   onNavigateToLocations() {

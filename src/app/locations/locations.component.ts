@@ -12,7 +12,6 @@ import {StatisticsService} from "../statistics/statistics.service";
 export class LocationsComponent implements OnInit {
   type: string = ''
   location: string = ''
-  isDisabled: boolean = true
 
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -39,6 +38,20 @@ export class LocationsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  onClear() {
+    this.location = ''
+  }
+
+  onNavigateToUsers() {
+    this.router.navigate(['/users'])
+  }
+
+  onLocationChanged() {
+    if (this.type != '' && this.location != '') {
+      this.onFilterStatistics()
+    }
+  }
+
   onFilterStatistics() {
     const result = this.statisticsService.getLocationInteractions({
       country: this.type == 'country' ? this.location : '',
@@ -55,17 +68,5 @@ export class LocationsComponent implements OnInit {
         console.error(error)
       }
     )
-  }
-
-  onClear() {
-    this.location = ''
-  }
-
-  onNavigateToUsers() {
-    this.router.navigate(['/users'])
-  }
-
-  onLocationChanged() {
-    this.isDisabled = this.type == '' || this.location == ''
   }
 }
