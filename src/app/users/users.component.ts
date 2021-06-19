@@ -3,6 +3,7 @@ import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 import {Label} from 'ng2-charts';
 import {FormControl, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {StatisticsService} from "../statistics/statistics.service";
 
 @Component({
   selector: 'app-users',
@@ -41,7 +42,8 @@ export class UsersComponent implements OnInit {
   ])
 
   constructor(
-    private router: Router
+    private router: Router,
+    private statisticsService: StatisticsService
   ) {
   }
 
@@ -59,7 +61,21 @@ export class UsersComponent implements OnInit {
   }
 
   onFilterStatistics(): void {
+    const result = this.statisticsService.getUserInteractions({
+      from: this.fromAge != '' ? parseInt(this.fromAge) : -1,
+      to: this.toAge != '' ? parseInt(this.toAge) : -1,
+      gender: this.gender
+    })
 
+    result.subscribe(
+      data => {
+        this.barChartLabels = data.xaxes.map(String)
+        this.barChartData[0].data = data.yaxes
+      },
+      error => {
+        console.error(error)
+      }
+    )
   }
 
   onClear() {

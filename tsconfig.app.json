@@ -7,7 +7,9 @@
   },
   "files": [
     "src/main.ts",
-    "src/polyfills.ts"
+    "src/polyfills.ts",
+    "src/app/statistics/UserInteractionParams.ts",
+    "src/app/statistics/UserStatistics.ts"
   ],
   "include": [
     "src/**/*.d.ts"
