@@ -1,0 +1,27 @@
+<div class="screen">
+  <div class="barChart">
+    <div style="display: block">
+      <canvas [chartType]="barChartType"
+              [colors]="colors"
+              [datasets]="barChartData"
+              [labels]="barChartLabels"
+              [legend]="barChartLegend"
+              [options]="barChartOptions"
+              baseChart>
+      </canvas>
+    </div>
+  </div>
+  <div class="filters">
+    <mat-form-field appearance="outline" class="filter">
+      <mat-label>Input any location</mat-label>
+      <input [(ngModel)]="location" matInput type="text">
+    </mat-form-field>
+    <button (click)="onFilterStatistics()" class="fullWidthButton" color="primary" mat-flat-button>Filter
+    </button>
+    <button (click)="onClear()" class="fullWidthButtonWithMarginTop" color="primary" mat-stroked-button>Clear</button>
+    <button (click)="onNavigateToUsers()" class="fullWidthButtonWithMarginTop" color="primary" mat-button>
+      Filter by users
+    </button>
+  </div>
+</div>
+
