@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 import {Label} from 'ng2-charts';
 import {FormControl, Validators} from "@angular/forms";
@@ -9,11 +9,11 @@ import {FormControl, Validators} from "@angular/forms";
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  @Input() fromAge = undefined
-  @Input() toAge = undefined
-  @Input() gender = 'none'
+  fromAge: string = ''
+  toAge: string = ''
+  gender: string = ''
 
-  public buttonColor = 'primary'
+  isDisabled = false
 
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -43,5 +43,20 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+  }
+
+  onAgeChanged() {
+    const from = parseInt(this.fromAge)
+    const to = parseInt(this.toAge)
+    this.isDisabled = from <= 0 || to <= 0 || from > to
+  }
+
+  onGenderChanged() {
+    console.log(this.gender)
+  }
+
+  onFilterStatistics(): void {
+
   }
 }
