@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ChartDataSets, ChartOptions, ChartType} from "chart.js";
 import {Label} from "ng2-charts";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-locations',
@@ -13,7 +14,7 @@ export class LocationsComponent implements OnInit {
   public barChartOptions: ChartOptions = {
     responsive: true,
   };
-  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  public barChartLabels: Label[] = ['Barcelona', 'Vilanova i la Geltru', 'Mataro', 'Sitges', 'Sant Boi', 'Girona', 'Puigcerda'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public colors: Array<any> = [
@@ -26,7 +27,9 @@ export class LocationsComponent implements OnInit {
     {data: [65, 59, 80, 81, 56, 55, 40], label: 'Interactions'}
   ];
 
-  constructor() {
+  constructor(
+    private router: Router
+  ) {
   }
 
   ngOnInit(): void {
@@ -38,5 +41,9 @@ export class LocationsComponent implements OnInit {
 
   onClear() {
     this.location = ''
+  }
+
+  onNavigateToUsers() {
+    this.router.navigate(['/users'])
   }
 }

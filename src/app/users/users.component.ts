@@ -17,9 +17,9 @@ export class UsersComponent implements OnInit {
   isDisabled = false
 
   public barChartOptions: ChartOptions = {
-    responsive: true,
+    responsive: true
   };
-  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  public barChartLabels: Label[] = ['18', '19', '20', '21', '22', '23', '24'];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public colors: Array<any> = [
@@ -58,13 +58,17 @@ export class UsersComponent implements OnInit {
     console.log(this.gender)
   }
 
+  onFilterStatistics(): void {
+
+  }
+
   onClear() {
     this.fromAge = ''
     this.toAge = ''
     this.gender = ''
   }
 
-  onFilterStatistics(): void {
+  onNavigateToLocations() {
     this.router.navigate(['/locations'])
   }
 }

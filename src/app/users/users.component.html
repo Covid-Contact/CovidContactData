@@ -10,6 +10,7 @@
               baseChart>
       </canvas>
     </div>
+    <div class="centerText">Age</div>
   </div>
   <div class="filters">
     <mat-form-field (change)="onAgeChanged()" appearance="outline" class="filter">
@@ -35,5 +36,8 @@
             mat-flat-button>Filter
     </button>
     <button (click)="onClear()" class="fullWidthButtonWithMarginTop" color="primary" mat-stroked-button>Clear</button>
+    <button (click)="onNavigateToLocations()" class="fullWidthButtonWithMarginTop" color="primary" mat-button>
+      Filter by locations
+    </button>
   </div>
 </div>

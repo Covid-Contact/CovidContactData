@@ -9,6 +9,11 @@
   padding-left: 25px;
 }
 
+.centerText {
+  text-align: center;
+  color: #5f615f;
+}
+
 .filters {
   width: 40%;
   padding-left: 25px;
