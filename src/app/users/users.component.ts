@@ -43,7 +43,6 @@ export class UsersComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
 
   onAgeChanged() {

@@ -1,0 +1,25 @@
+.screen {
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.barChart {
+  width: 60%;
+  padding-left: 25px;
+}
+
+.filters {
+  width: 40%;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 50px;
+}
+
+.filter {
+  width: 100%;
+}
+
+.fullWidthButton {
+  width: 100%;
+}
