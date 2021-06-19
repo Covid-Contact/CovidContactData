@@ -2,15 +2,29 @@
   height: 100%;
   width: 100%;
   display: flex;
-  padding-left: 25px;
 }
 
 .barChart {
   width: 60%;
+  padding-left: 25px;
 }
 
 .filters {
-  width: 30%;
+  width: 40%;
   padding-left: 25px;
+  padding-right: 25px;
   padding-top: 50px;
+}
+
+.filter {
+  width: 48%;
+}
+
+.filterWithMargin {
+  width: 48%;
+  padding-left: 4%;
+}
+
+.fullWidthButton {
+  width: 100%;
 }

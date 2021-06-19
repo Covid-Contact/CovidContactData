@@ -6,11 +6,31 @@
               [labels]="barChartLabels"
               [legend]="barChartLegend"
               [options]="barChartOptions"
+              [colors]="colors"
               baseChart>
       </canvas>
     </div>
   </div>
   <div class="filters">
-    Hello
+    <mat-form-field appearance="outline" class="filter">
+      <mat-label>From age</mat-label>
+      <input [formControl]="fromAgeControl" [ngModel]="fromAge" matInput type="number">
+      <mat-error *ngIf="fromAgeControl.hasError('min')">Age has to be greater than 0</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="filterWithMargin">
+      <mat-label>To age</mat-label>
+      <input [formControl]="toAgeControl" [ngModel]="toAge" matInput type="number">
+      <mat-error *ngIf="toAgeControl.hasError('min')">Age has to be greater than 0</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="filter">
+      <mat-label>Gender</mat-label>
+      <mat-select>
+        <mat-option value="male">Male</mat-option>
+        <mat-option value="female">Female</mat-option>
+        <mat-option value="other">Other</mat-option>
+        <mat-option value="none">None</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <button class="fullWidthButton" color="primary" mat-flat-button>Filter</button>
   </div>
 </div>
