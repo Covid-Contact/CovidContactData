@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 import {Label} from 'ng2-charts';
 import {FormControl, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-users',
@@ -39,7 +40,9 @@ export class UsersComponent implements OnInit {
     Validators.min(1)
   ])
 
-  constructor() {
+  constructor(
+    private router: Router
+  ) {
   }
 
   ngOnInit(): void {
@@ -55,7 +58,13 @@ export class UsersComponent implements OnInit {
     console.log(this.gender)
   }
 
-  onFilterStatistics(): void {
+  onClear() {
+    this.fromAge = ''
+    this.toAge = ''
+    this.gender = ''
+  }
 
+  onFilterStatistics(): void {
+    this.router.navigate(['/locations'])
   }
 }

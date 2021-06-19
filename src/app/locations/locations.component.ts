@@ -32,11 +32,11 @@ export class LocationsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onLocationChanged() {
+  onFilterStatistics() {
 
   }
 
-  onFilterStatistics() {
-
+  onClear() {
+    this.location = ''
   }
 }
