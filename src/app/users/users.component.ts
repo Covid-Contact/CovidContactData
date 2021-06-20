@@ -11,8 +11,8 @@ import {StatisticsService} from "../statistics/statistics.service";
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  fromAge: string = '18'
-  toAge: string = '30'
+  fromAge: string = '16'
+  toAge: string = '45'
   gender: string = ''
 
   public barChartOptions: ChartOptions = {

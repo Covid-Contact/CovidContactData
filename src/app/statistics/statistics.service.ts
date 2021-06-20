@@ -5,7 +5,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
   providedIn: 'root'
 })
 export class StatisticsService {
-  private baseUrl = 'http://covidcontact.cat:8080/statistics'
+  private baseUrl = "http://covidcontact.cat:8080/statistics"
   private userStatisticsUrl = this.baseUrl + "/user"
   private userInteractionsUrl = this.userStatisticsUrl + "/interactions"
   private locationStatisticsUrl = this.baseUrl + "/location"
@@ -19,16 +19,18 @@ export class StatisticsService {
   getUserInteractions(params: UserInteractionParams) {
     let queryParams = new HttpParams()
     if (params.from != -1) {
-      queryParams = queryParams.set('from', params.from)
+      queryParams = queryParams.append('from', params.from)
     }
 
     if (params.to != -1) {
-      queryParams = queryParams.set('to', params.to)
+      queryParams = queryParams.append('to', params.to)
     }
 
     if (params.gender != '') {
-      queryParams = queryParams.set('gender', params.gender)
+      queryParams = queryParams.append('gender', params.gender)
     }
+
+    console.log(queryParams)
 
     return this.http.get<UserStatistics>(this.userInteractionsUrl, {params: queryParams})
   }
