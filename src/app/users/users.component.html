@@ -13,28 +13,25 @@
     <div class="centerText">Age</div>
   </div>
   <div class="filters">
-    <mat-form-field (change)="onAgeChanged()" appearance="outline" class="filter">
+    <mat-form-field (change)="onValueChanged()" appearance="outline" class="filter">
       <mat-label>From age</mat-label>
       <input [(ngModel)]="fromAge" [formControl]="fromAgeControl" matInput type="number">
       <mat-error *ngIf="fromAgeControl.hasError('min')">Age has to be greater than 0</mat-error>
     </mat-form-field>
-    <mat-form-field (change)="onAgeChanged()" appearance="outline" class="filterWithMargin">
+    <mat-form-field (change)="onValueChanged()" appearance="outline" class="filterWithMargin">
       <mat-label>To age</mat-label>
       <input [(ngModel)]="toAge" [formControl]="toAgeControl" matInput type="number">
       <mat-error *ngIf="toAgeControl.hasError('min')">Age has to be greater than 0</mat-error>
     </mat-form-field>
-    <mat-form-field (change)="onGenderChanged()" appearance="outline" class="filter">
+    <mat-form-field appearance="outline" class="filter">
       <mat-label>Gender</mat-label>
-      <mat-select [(value)]="gender">
+      <mat-select (selectionChange)="onValueChanged()" [(value)]="gender">
         <mat-option value="">None</mat-option>
-        <mat-option value="male">Male</mat-option>
-        <mat-option value="female">Female</mat-option>
-        <mat-option value="other">Other</mat-option>
+        <mat-option value="Male">Male</mat-option>
+        <mat-option value="Female">Female</mat-option>
+        <mat-option value="Other">Other</mat-option>
       </mat-select>
     </mat-form-field>
-    <button (click)="onFilterStatistics()" [disabled]="isDisabled" class="fullWidthButton" color="primary"
-            mat-flat-button>Filter
-    </button>
     <button (click)="onClear()" class="fullWidthButtonWithMarginTop" color="primary" mat-stroked-button>Clear</button>
     <button (click)="onNavigateToLocations()" class="fullWidthButtonWithMarginTop" color="primary" mat-button>
       Filter by locations

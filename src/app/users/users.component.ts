@@ -3,6 +3,7 @@ import {ChartDataSets, ChartOptions, ChartType} from 'chart.js';
 import {Label} from 'ng2-charts';
 import {FormControl, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {StatisticsService} from "../statistics/statistics.service";
 
 @Component({
   selector: 'app-users',
@@ -10,16 +11,14 @@ import {Router} from "@angular/router";
   styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
-  fromAge: string = ''
-  toAge: string = ''
+  fromAge: string = '16'
+  toAge: string = '45'
   gender: string = ''
-
-  isDisabled = false
 
   public barChartOptions: ChartOptions = {
     responsive: true
   };
-  public barChartLabels: Label[] = ['18', '19', '20', '21', '22', '23', '24'];
+  public barChartLabels: Label[] = [];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public colors: Array<any> = [
@@ -29,7 +28,7 @@ export class UsersComponent implements OnInit {
   ]
 
   public barChartData: ChartDataSets[] = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Interactions'}
+    {data: [], label: 'Interactions'}
   ];
 
   public fromAgeControl = new FormControl(this.fromAge, [
@@ -41,31 +40,51 @@ export class UsersComponent implements OnInit {
   ])
 
   constructor(
-    private router: Router
+    private router: Router,
+    private statisticsService: StatisticsService
   ) {
   }
 
   ngOnInit(): void {
+    this.onFilterStatistics()
   }
 
-  onAgeChanged() {
+  onValueChanged() {
     const from = parseInt(this.fromAge)
     const to = parseInt(this.toAge)
-    this.isDisabled = from <= 0 || to <= 0 || from > to
-  }
 
-  onGenderChanged() {
-    console.log(this.gender)
+    if (to < from) {
+      this.toAge = this.fromAge
+    }
+
+    this.onFilterStatistics()
   }
 
   onFilterStatistics(): void {
+    const result = this.statisticsService.getUserInteractions({
+      from: this.fromAge != '' ? parseInt(this.fromAge) : -1,
+      to: this.toAge != '' ? parseInt(this.toAge) : -1,
+      gender: this.gender
+    })
 
+    result.subscribe(
+      data => {
+        this.barChartLabels = data.xaxes.map(String)
+        this.barChartData[0].data = data.yaxes
+      },
+      error => {
+        console.error(error)
+      }
+    )
   }
 
   onClear() {
     this.fromAge = ''
     this.toAge = ''
     this.gender = ''
+
+    this.barChartLabels = []
+    this.barChartData[0].data = []
   }
 
   onNavigateToLocations() {

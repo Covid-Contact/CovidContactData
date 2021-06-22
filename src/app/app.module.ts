@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppComponent} from './app.component';
-import {TestingComponent} from './testing/testing.component';
 import {AppRoutingModule} from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatIconModule} from "@angular/material/icon";
@@ -16,11 +15,11 @@ import {MatInputModule} from "@angular/material/input";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {MatOptionModule} from "@angular/material/core";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
     AppComponent,
-    TestingComponent,
     UsersComponent,
     LocationsComponent
   ],
@@ -37,7 +36,8 @@ import {MatOptionModule} from "@angular/material/core";
     FormsModule,
     ReactiveFormsModule,
     MatSelectModule,
-    MatOptionModule
+    MatOptionModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

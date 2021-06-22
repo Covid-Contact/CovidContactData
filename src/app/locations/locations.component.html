@@ -12,12 +12,18 @@
     </div>
   </div>
   <div class="filters">
-    <mat-form-field appearance="outline" class="filter">
+    <mat-form-field (change)="onLocationChanged()" appearance="outline" class="filter">
+      <mat-label>Location type</mat-label>
+      <mat-select [(value)]="type">
+        <mat-option value="country">Country</mat-option>
+        <mat-option value="region">Region</mat-option>
+        <mat-option value="province">Province</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field (change)="onLocationChanged()" appearance="outline" class="filterWithMargin">
       <mat-label>Input any location</mat-label>
       <input [(ngModel)]="location" matInput type="text">
     </mat-form-field>
-    <button (click)="onFilterStatistics()" class="fullWidthButton" color="primary" mat-flat-button>Filter
-    </button>
     <button (click)="onClear()" class="fullWidthButtonWithMarginTop" color="primary" mat-stroked-button>Clear</button>
     <button (click)="onNavigateToUsers()" class="fullWidthButtonWithMarginTop" color="primary" mat-button>
       Filter by users
